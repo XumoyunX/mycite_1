@@ -1,6 +1,27 @@
 from django.shortcuts import render
-
+from .models import *
 
 
 def index(request):
-    return render(request, 'main/index.html')
+    categoriya = Categoriya.objects.all()
+
+    ctx = {
+        'categoriya': categoriya
+    }
+
+    return render(request, 'main/index.html', ctx)
+
+
+
+def pro(request, id):
+    product = Product.objects.filter(categoriya_id=id)
+    ctx = {
+        "product": product
+    }
+
+    return render(request, 'main/pro.html')
+
+
+
+
+
